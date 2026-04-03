@@ -1,0 +1,21 @@
+[build]
+builder = "NIXPACKS"
+
+[deploy]
+startCommand = "uvicorn backend.main:app --host 0.0.0.0 --port $PORT"
+healthcheckPath = "/api/health"
+healthcheckTimeout = 300
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 3
+
+[[volumes]]
+mountPath = "/app/data"
+name = "race-data"
+
+[[volumes]]
+mountPath = "/app/uploads"
+name = "race-uploads"
+
+[[volumes]]
+mountPath = "/app/outputs"
+name = "race-outputs"
